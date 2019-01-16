@@ -5,12 +5,12 @@
 	<title>regidter</title>
 </head>
 <body>
-	<form action="http://localhost:8001/process_post" method="POST">
+	<!-- <form action="http://localhost:8001/process_post" method="POST"> -->
 		<div>
-			<input type="text" placeholder="用户名" name='name'>
+			<input type="text" placeholder="用户名" id='name'>
 		</div>
 		<div>
-			<input type="password" placeholder="密码" name ='password'>
+			<input type="password" placeholder="密码" id ='password'>
 		</div>
 		<!-- <div>
 			<input type="password" placeholder="确认密码">
@@ -19,26 +19,30 @@
 		<div>
 			<a href="javascript:;">登陆</a>
 		</div> -->
-		<input type="submit" value="Submit">
-	</form>
+		<input type="submit" value="Submit" id="submit" onclick="fdata()">
+	<!-- </form> -->
 </body>
-<script src='http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js'></script>
+<!-- <script src='http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js'></script> -->
 <script>
-	function register(){
-		var data = $('form').serialize();
-		$.ajax({
-			url:'/register',
-			type:'POST',
-			data:data,
-			success:function(data,status){
-				if(status == 'success'){
-					location.href = 'register'
-				}
+	// 
+	function fdata(){
+		console.log('register.html')
+		let name = document.getElementById('name').value
+		let password = document.getElementById('password').value
+		let a ={
+			name:name,
+			password:password
+		}
+		fetch('http://localhost:8001/process_post',{
+			method:'post',
+			headers:{
+				'Content-Type': 'application/json'
 			},
-			error:function(res,err){
-				console.log(err)
-			}
-		})
+			body:JSON.stringify(a)
+		}).then(response => response.json())
+			.then(res=>{
+				console.log(res)
+			})
 	}
 </script>
 </html>

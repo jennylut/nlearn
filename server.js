@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlJson = bodyParser.json({limit:'1mb'})
+var urlencodedParser = bodyParser.urlencoded({ extended: true })
 
  
 app.use(express.static('public'));
@@ -22,7 +23,7 @@ app.get('/register.html', function (req, res) {
 //    res.end(JSON.stringify(response));
 // })
 
-app.post('/process_post',urlencodedParser,function(req,res){
+app.post('/process_post',urlJson,urlencodedParser,function(req,res){
    res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'});//设置response编码为utf-8
   console.log(req)
   var response = {
