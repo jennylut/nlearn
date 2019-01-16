@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>regidter</title>
+</head>
+<body>
+	<form action="http://localhost:8001/process_post" method="POST">
+		<div>
+			<input type="text" placeholder="用户名" name='name'>
+		</div>
+		<div>
+			<input type="password" placeholder="密码" name ='password'>
+		</div>
+		<!-- <div>
+			<input type="password" placeholder="确认密码">
+		</div>		
+		<input type="button" onclick="register()" value ='注册'>
+		<div>
+			<a href="javascript:;">登陆</a>
+		</div> -->
+		<input type="submit" value="Submit">
+	</form>
+</body>
+<script src='http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js'></script>
+<script>
+	function register(){
+		var data = $('form').serialize();
+		$.ajax({
+			url:'/register',
+			type:'POST',
+			data:data,
+			success:function(data,status){
+				if(status == 'success'){
+					location.href = 'register'
+				}
+			},
+			error:function(res,err){
+				console.log(err)
+			}
+		})
+	}
+</script>
+</html>

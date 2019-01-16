@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>两个数组合并的函数</title>
+</head>
+<body>
+	两个数组合并的函数封装
+</body>
+<script>
+	//a,b为数组，需要将b数组里面的属性合并到a里面 attrName 为要合并的属性名称
+	function merge(a,b,attrName){
+		let attr = attrName
+		b.map((value,index)=>{
+			//数组b 长度大于a的长度时，需要判断
+			if(a[index] !== undefined){
+				a[index][attr] = value[attr]
+			} else{
+				return
+			}
+		})
+		return a 
+	}
+	var a = [{name:'dede'},{name:'jeen'}]
+	var b = [{age:'18'},{age:'19'},{age:'20'}]
+	var c = 'age'
+	merge(a,b,c)
+	console.log(a)
+</script>
+</html>
