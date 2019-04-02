@@ -2,6 +2,7 @@ var express =require('express')
 var formiadable = require('formidable')
 var app = express()
 var fs = require('fs')
+var http = require('http')
 
 var timestamp = new Date().getTime()
 
@@ -19,10 +20,15 @@ app.post('/upload',function(req,res){
         console.log('parsing done')
         console.log(files.upload.path)
         fs.writeFileSync(`common/imgs/${timestamp}.jpg`, fs.readFileSync(files.upload.path))
-        // res.wirte('上传成功！')
-        setTimeout(()=>{
-            res.redirect('upload.html')
-        },100)
+
+        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})//设置charset=utf-8 解决中文乱码
+        res.write('上传成功！')
+        res.end()
+       
+        // setTimeout(()=>{
+        //     res.redirect('upload.html')
+        // },200)
+
     })
 })
 
